@@ -23,6 +23,7 @@ import javax.xml.crypto.KeySelectorException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -346,7 +347,7 @@ public class MarketService {
     }
 
     private File getFileFromResources(String path) throws IOException {
-        File tempFile = File.createTempFile("tmp", null);
+        File tempFile = Files.createTempFile("tmp", null).toFile();
         tempFile.deleteOnExit();
         FileOutputStream out = new FileOutputStream(tempFile);
         IOUtils.copy(new ClassPathResource(path).getInputStream(), out);
